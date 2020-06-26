@@ -5,9 +5,10 @@ import com.dao.UserDao;
 
 public class UserService {
 	
-	public boolean validateLogin(String username,String password) {
+	public boolean validateLogin(LoginBean userBn ) {
 		UserDao userDAO = new UserDao();
-		boolean isValid = userDAO.validateLogin(username,password);
+		boolean isValid = userDAO.validateLogin(userBn);
+		
 		return isValid;
 	}
 }
