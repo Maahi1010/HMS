@@ -42,38 +42,26 @@ public class LoginServlet extends HttpServlet {
         
           
         String name=request.getParameter("username");  
-       String password=request.getParameter("password");  
+       String password=request.getParameter("password"); 
+       
         LoginBean userBn = new LoginBean();
+        
 		userBn.setUsername(name);
 		userBn.setPassword(password);
-		//UserService userSvc = new UserService();
-		//boolean userFound= userSvc.getUserService(userBn);
-//with dao class
 		UserService userSvc = new UserService();
 		
-		boolean userFound= userSvc.validateLogin(name,password);
+		
+		boolean userFound= userSvc.validateLogin(userBn);
+		
 		if(userFound) {
 			HttpSession session=request.getSession();  
 	        session.setAttribute("name",name); 
-	        out.println("Welcome, "+name);  
-			//RequestDispatcher rd = getServletContext().getRequestDispatcher("/welcome.jsp");
-	        out.print("You are successfully logged in !");  
-	        out.println("<a href='LoginServlet' method='get'>logout</a>");  
-// upto here	        
-			//rd.forward(request, response);
-		}
-/* remove comment for w/o dao execution
-		if(password.equalsIgnoreCase("admin123")) {
-			HttpSession session=request.getSession();  
-	        session.setAttribute("name",name); 
-	        out.println("Welcome, "+name);  
-			//RequestDispatcher rd = getServletContext().getRequestDispatcher("/welcome.jsp");
-	        out.print("You are successfully logged in !");  
+	        out.println("Welcome, "+name);  			
+	        out.println("You are successfully logged in !");  
 	        out.println("<a href='LoginServlet' method='get'>logout</a>");  
 	        
-			//rd.forward(request, response);
+			
 		}
-*/
 		else {
 			RequestDispatcher rd = 
 					getServletContext().getRequestDispatcher("/login.jsp");
