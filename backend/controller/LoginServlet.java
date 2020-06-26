@@ -48,6 +48,21 @@ public class LoginServlet extends HttpServlet {
 		userBn.setPassword(password);
 		//UserService userSvc = new UserService();
 		//boolean userFound= userSvc.getUserService(userBn);
+//with dao class
+		UserService userSvc = new UserService();
+		
+		boolean userFound= userSvc.validateLogin(name,password);
+		if(userFound) {
+			HttpSession session=request.getSession();  
+	        session.setAttribute("name",name); 
+	        out.println("Welcome, "+name);  
+			//RequestDispatcher rd = getServletContext().getRequestDispatcher("/welcome.jsp");
+	        out.print("You are successfully logged in !");  
+	        out.println("<a href='LoginServlet' method='get'>logout</a>");  
+// upto here	        
+			//rd.forward(request, response);
+		}
+/* remove comment for w/o dao execution
 		if(password.equalsIgnoreCase("admin123")) {
 			HttpSession session=request.getSession();  
 	        session.setAttribute("name",name); 
@@ -58,6 +73,7 @@ public class LoginServlet extends HttpServlet {
 	        
 			//rd.forward(request, response);
 		}
+*/
 		else {
 			RequestDispatcher rd = 
 					getServletContext().getRequestDispatcher("/login.jsp");
