@@ -10,30 +10,32 @@ package com.dao;
 
 	public class UserDao {
 		
-		public boolean validateLogin(String username,String password)
-		{
-			Connection con=null;
-			boolean isValid=false;	
-		try
-		{
-			con=DBConnectionUtil.openConnection();
-			String query="select 1 from user_login where username=? and password=?";
-			PreparedStatement ps=con.prepareStatement(query);
-			ps.setNString(1, username);
-			ps.setNString(2, password);;
-			ResultSet rs=ps.executeQuery();
-			if(rs.next())
-				isValid=true;
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		}
-		finally
-		{
-			DBConnectionUtil.closeConnection(con);
-		}
-		return isValid;
-		}
+		public boolean validateLogin(LoginBean userBn)
+	{
+		Connection con=null;
+		boolean isValid=false;	
+	try
+	{
+		con=DBConnectionUtil.openConnection();
+		String query="select 1 from user_login where username=? and password=?";
+		PreparedStatement ps=con.prepareStatement(query);
+		ps.setString(1, userBn.getUsername());
+		ps.setString(2, userBn.getPassword());;
+		
+		ResultSet rs=ps.executeQuery();
+		if(rs.next())
+			isValid=true;
+	}
+	catch(SQLException e) {
+		e.printStackTrace();
+	}
+	finally
+	{
+		DBConnectionUtil.closeConnection(con);
+	}
+	return isValid;
+	}
+	
 		
 		}
 		
