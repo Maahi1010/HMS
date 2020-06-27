@@ -18,15 +18,16 @@ public class PatientDao {
 		//Login to insert the customer details to database using JDBC connection
 		boolean flag=false;
 		con=DatabaseUtil.getConnection();
-		ps=con.prepareStatement("insert into Patient_details(patient_id,patient_name,patient_age,patient_doa,patient_typeofbed,patient_address,patient_state,patient_city) values((?,?,?,?,?,?,?,?)");
+		ps=con.prepareStatement("insert into Patient_details(patient_id,pation_ssn_id,patient_name,patient_age,patient_doa,patient_typeofbed,patient_address,patient_state,patient_city) values((?,?,?,?,?,?,?,?)");
 	ps.setInt(1, pt.getPatient_id());
-	ps.setString(2, pt.getPatient_name());
-	ps.setInt(3, pt.getPatient_age());
-	ps.setDate(4, new java.sql.Date(pt.getPatient_doa()));
-	ps.setString(5, pt.getPatient_typeofbed());
-	ps.setString(6, pt.getPatient_address());
-	ps.setString(7, pt.getPatient_state());
-	ps.setString(8, pt.getPatient_city());
+		ps.setInt(2, pt.getPatient_ssn_id());
+	ps.setString(3, pt.getPatient_name());
+	ps.setInt(4, pt.getPatient_age());
+	ps.setDate(5, new java.sql.Date(pt.getPatient_doa()));
+	ps.setString(6, pt.getPatient_typeofbed());
+	ps.setString(7, pt.getPatient_address());
+	ps.setString(8, pt.getPatient_state());
+	ps.setString(9, pt.getPatient_city());
 	
 	int rowstatus=ps.executeUpdate();
 	DatabaseUtil.closeConnection(con);
@@ -38,7 +39,7 @@ public class PatientDao {
 	return flag;
 	}
 	
-	public Patient searchPatientById(int patient_id, PreparedStatement ps) throws SQLException, ClassNotFoundException{
+	public ArrayList<Patient> searchPatientById(int patient_id, PreparedStatement ps) throws SQLException, ClassNotFoundException{
 		Patient pt  = null;
 		@SuppressWarnings("unused")
 		boolean flag = false;
@@ -67,7 +68,7 @@ public class PatientDao {
 		
 		return pt;
 	}
-	public boolean deletePatient(int patient_id, PreparedStatement ps) throws SQLException, ClassNotFoundException, SameValueException, NoCustomerException{
+	public boolean deletePatientDetails(int patient_id, PreparedStatement ps) throws SQLException, ClassNotFoundException{
 		@SuppressWarnings("unused")
 		Patient  pt = null;
 		@SuppressWarnings("unused")
@@ -89,7 +90,7 @@ public class PatientDao {
 			throw new NoPatientException("Patient does not exist");
 	}
 	
-public boolean updatePatient(int patient_id,String patient_name, int patient_age, Date patient_doa,String patient_typeofbed,String patient_address,String patient_state,String patient_city) throws SQLException, ClassNotFoundException, SameValueException{
+public boolean updatePatientDetails(int patient_id,String patient_name, int patient_age, Date patient_doa,String patient_typeofbed,String patient_address,String patient_state,String patient_city) throws SQLException, ClassNotFoundException, SameValueException{
 		
 		con = DatabaseUtil.getConnection();
 		
