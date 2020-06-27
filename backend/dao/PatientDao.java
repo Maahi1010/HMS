@@ -18,9 +18,9 @@ public class PatientDao {
 		//Login to insert the customer details to database using JDBC connection
 		boolean flag=false;
 		con=DatabaseUtil.getConnection();
-		ps=con.prepareStatement("insert into Patient_details(patient_id,pation_ssn_id,patient_name,patient_age,patient_doa,patient_typeofbed,patient_address,patient_state,patient_city) values((?,?,?,?,?,?,?,?)");
+		ps=con.prepareStatement("insert into Patient_details(patient_id,patient_SSNid,patient_name,patient_age,patient_doa,patient_typeofbed,patient_address,patient_state,patient_city) values((?,?,?,?,?,?,?,?)");
 	ps.setInt(1, pt.getPatient_id());
-		ps.setInt(2, pt.getPatient_ssn_id());
+		ps.setInt(2, pt.getPatient_SSNid());
 	ps.setString(3, pt.getPatient_name());
 	ps.setInt(4, pt.getPatient_age());
 	ps.setDate(5, new java.sql.Date(pt.getPatient_doa()));
