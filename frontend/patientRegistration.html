@@ -5,6 +5,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="patientRegistration.css">
         <title>Patient Registration</title>
+
+<script>
+   
+function GEEKFORGEEKS()                                    
+{
+    var name = document.forms["RegForm"]["name"];              
+    var pid = document.forms["RegForm"]["pid"];    
+    var age = document.forms["RegForm"]["age"];  
+    var address =  document.forms["RegForm"]["address"];  
+    var city = document.forms["RegForm"]["city"];  
+    var state = document.forms["RegForm"]["state"];
+   
+ if (age.value<1)                          
+    {
+        window.alert("Please enter valid age.");
+        age.focus();
+        return false;
+    }
+   
+   else
+    return true;
+}
+
+
+
+
+</script>
     </head>
     <body>
         <div class="background">
@@ -26,31 +53,32 @@
         </div>
         <div class="center">
             <h2>Patient Registration</h2>
-            <form>
+            <form name="RegForm" onsubmit="return GEEKFORGEEKS()">
                 <div class="inputBox">
-                <label>Patient SSN ID:</label>
-                <input class="patiendId" type="text" name="pid" value=""><br><br>
-                <label>Patient Name:</label>
-                <input class="name" type="text" name="name" value=""><br><br>
-                <label>Patient Age:</label>
-                <input class="age" type="text" name="age" value=""><br><br>
-                <label>Date of Admission:</label>
-                <input class="date" type="date" name="date" value=""><br><br>
-                <label>Type of bed:</label>
-                <select class="bed" name="bed">
-                    <option>Select</option>
+                <label>Patient SSN ID*</label>
+                <input class="patiendId" type="text" name="pid" value="" required ><br><br>
+                <label>Patient Name*</label>
+                <input class="name" type="text" name="name" value="" required><br><br>
+                <label>Patient Age*</label>
+                <input class="age" type="number" name="age" value="" min="1" required><br><br>
+                <label>Date of Admission*</label>
+                <input class="date" type="date" name="date" value="" required><br><br>
+                <label>Type of bed*</label>
+                <select class="bed" name="bed" required>
+                    <option value="">Select</option>
                     <option>General Ward</option>
                     <option>Semi Sharing</option>
                     <option>Single Room</option>
                 </select><br><br>
-                <label>Address:</label>
-                <textarea class="address" name="address"></textarea><br><br>
-                <label>City</label>
-                <input class="city" type="text" name="city"><br><br>
-                <label>State:</label>
-                <input class="state" type="text" name="state"><br><br>
-                <label>Status</label>
-                <select class="status" name="status">
+                <label>Address*</label>
+                <input class="address" type="text" name="address" value="" required><br><br>
+                <label>City*</label>
+                <input class="city" type="text" name="city" required><br><br>
+                <label>State*</label>
+                <input class="state" type="text" name="state" required><br><br>
+
+                 <label>Status*</label>
+                 <select class="status" name="status">
                     <option>Active</option>
                     <option>Discharged</option>
                 </select><br><br>
