@@ -13,25 +13,48 @@ public class PatientDao {
 	ResultSet result=null;
 	PreparedStatement ps = null;
 	PreparedStatement ps1 = null;
-	public boolean addPatient(Patient pt, PreparedStatement ps) throws SQLException, ClassNotFoundException
+	public String findCustomerBySsnId(int ssn_id)
+	{
+		String sql = "select * from Patient_details where patient_SSNid=?";
+		ResultSet result;
+		String cId="";
+		
+		try {
+			Connection con = DBConnectionUtil.openConnection();
+			 ps = con.prepareStatement(sql);
+			ps.setInt(1, ssn_id);
+			 result = ps.executeQuery();
+			 while (result.next()) {
+				 	cId = result.getString(1);
+		            return cId;
+		        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		DBConnectionUtil.closeConnection(con);
+		DBConnectionUtil.closeStatement(ps);
+		return null;
+	}
+	
+	public boolean addPatient(PatientBean pt) throws SQLException, ClassNotFoundException
 	{
 		//Login to insert the customer details to database using JDBC connection
 		boolean flag=false;
-		con=DatabaseUtil.getConnection();
-		ps=con.prepareStatement("insert into Patient_details(patient_id,patient_SSNid,patient_name,patient_age,patient_doa,patient_typeofbed,patient_address,patient_state,patient_city) values((?,?,?,?,?,?,?,?)");
-	ps.setInt(1, pt.getPatient_id());
-		ps.setInt(2, pt.getPatient_SSNid());
-	ps.setString(3, pt.getPatient_name());
-	ps.setInt(4, pt.getPatient_age());
-	ps.setDate(5, new java.sql.Date(pt.getPatient_doa()));
-	ps.setString(6, pt.getPatient_typeofbed());
-	ps.setString(7, pt.getPatient_address());
-	ps.setString(8, pt.getPatient_state());
-	ps.setString(9, pt.getPatient_city());
+		con=DBConnectionUtil.openConnection();
+		ps=con.prepareStatement("insert into Patient_details(patient_SSNid,patient_id,patient_name,patient_age,patient_doa,patient_typeofbed,patient_address,patient_state,patient_city,patient_status) values(?,patSeq.nextval,?,?,TO_DATE(?, 'YYYY-MM-DD'),?,?,?,?,'active')");
+	ps.setInt(1, pt.getSsn());
+	ps.setString(2, pt.getName());
+	ps.setInt(3, pt.getAge());
+	
+	ps.setString(4,pt.getDoa());
+	ps.setString(5, pt.getBedType());
+	ps.setString(6, pt.getAddress());
+	ps.setString(7, pt.getState());
+	ps.setString(8, pt.getCity());
 	
 	int rowstatus=ps.executeUpdate();
-	DatabaseUtil.closeConnection(con);
-	DatabaseUtil.closeStatement(ps);
+	DBConnectionUtil.closeConnection(con);
+	DBConnectionUtil.closeStatement(ps);
 	if(rowstatus>0)
 	{
 		return true;
