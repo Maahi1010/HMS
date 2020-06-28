@@ -7,25 +7,29 @@
         <title>Patient Registration</title>
 
 <script>
-   
+    
 function GEEKFORGEEKS()                                    
-{
-    var name = document.forms["RegForm"]["name"];              
+{ 
+    var name = document.forms["RegForm"]["name"];               
     var pid = document.forms["RegForm"]["pid"];    
     var age = document.forms["RegForm"]["age"];  
     var address =  document.forms["RegForm"]["address"];  
     var city = document.forms["RegForm"]["city"];  
     var state = document.forms["RegForm"]["state"];
    
- if (age.value<1)                          
-    {
-        window.alert("Please enter valid age.");
-        age.focus();
-        return false;
+ if (age.value<1)                           
+    { 
+        window.alert("Please enter valid age."); 
+        age.focus(); 
+        return false; 
     }
    
    else
-    return true;
+   {
+    window.alert("Registered Successfully"); 
+     return true; 
+   }
+   
 }
 
 
@@ -56,11 +60,11 @@ function GEEKFORGEEKS()
             <form name="RegForm" onsubmit="return GEEKFORGEEKS()">
                 <div class="inputBox">
                 <label>Patient SSN ID*</label>
-                <input class="patiendId" type="text" name="pid" value="" required ><br><br>
+                <input class="patiendId" type="text" name="pid" value="" minlength="9" maxlength="9" required ><br><br>
                 <label>Patient Name*</label>
                 <input class="name" type="text" name="name" value="" required><br><br>
                 <label>Patient Age*</label>
-                <input class="age" type="number" name="age" value="" min="1" required><br><br>
+                <input class="age" type="number" name="age" value=""  maxlength="3" required><br><br>
                 <label>Date of Admission*</label>
                 <input class="date" type="date" name="date" value="" required><br><br>
                 <label>Type of bed*</label>
